@@ -1,4 +1,34 @@
 .modal {
   font-size: 1.6rem;
   color: var(--color-textInWhite);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  overflow: hidden;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.363);
+  height: 100%;
+  width: 100vw;
+  position: absolute;
+  z-index: 1;
+}
+
+.total {
+  margin: 1.5rem 0rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.totalAmt {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.btnTotal {
+  display: flex;
+  justify-content: right;
+  gap: 1.5rem;
 }

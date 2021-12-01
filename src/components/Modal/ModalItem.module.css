@@ -1,0 +1,33 @@
+.modalItem {
+  display: flex;
+  justify-content: space-between;
+  min-width: 500px;
+  border-bottom: 0.5px solid var(--color-secondary);
+  padding: 1rem 0;
+  align-items: center;
+}
+
+.item {
+  display: flex;
+  align-items: flex-end;
+  gap: max(40%);
+}
+
+.price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--color-primary);
+}
+
+.priceName {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.7rem;
+}
+
+.itemNumber {
+  border-radius: 3px;
+  border: 1px solid var(--color-quantity-focus);
+  padding: 0rem 1rem;
+}
