@@ -1,0 +1,15 @@
+.cart {
+  color: var(--color-white);
+  background-color: var(--color-secondary);
+  padding: 1rem 3.5rem;
+  font-size: 1.6rem;
+  font-weight: bold;
+  width: max-content;
+  border-radius: 30px;
+}
+
+.items {
+  background: var(--color-btn-hover);
+  padding: 0.2rem 1.3rem;
+  border-radius: 3rem;
+}
