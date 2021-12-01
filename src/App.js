@@ -1,16 +1,16 @@
 import Header from "./components/Navbar/Header";
-import FoodItem from "./components/Food/FoodItem";
+import FoodList from "./components/Food/FoodList";
+import Text from "./components/Text";
+import Modal from "./components/Modal/Modal";
 import "./App.css";
-import Card from "./components/UI/Card";
 
 function App() {
   return (
     <>
       <Header />
-      <Card>
-        <FoodItem />
-        <FoodItem />
-      </Card>
+      <Text />
+      <Modal />
+      <FoodList />
     </>
   );
 }

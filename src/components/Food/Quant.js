@@ -5,7 +5,7 @@ function Quant() {
     <div className={styles.amount}>
       <div className={styles.desc}>
         <p className={styles.amt}>Amount</p>
-        <input type="number" name="" id="" className={styles.input} min="1" />
+        <input type="number" className={styles.input} min="1" />
       </div>
       <Button>+Add</Button>
     </div>

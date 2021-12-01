@@ -13,3 +13,16 @@
   padding: 0.2rem 1.3rem;
   border-radius: 3rem;
 }
+
+.cart:hover .items {
+  background-color: var(--color-white);
+}
+
+.cart:hover {
+  background-color: var(--color-btn-hover);
+  color: var(--color-secondary);
+}
+
+.cart:active {
+  background-color: var(--color-quantity);
+}

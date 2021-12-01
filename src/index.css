@@ -4,15 +4,19 @@
   box-sizing: border-box;
   --color-primary: rgb(17, 159, 202);
   --color-secondary: rgb(7, 89, 114);
-  --color-price: rgb(3, 108, 156);
+  --color-textInWhite: rgb(1, 59, 107);
+  --color-price: rgb(0, 108, 158);
   --color-btn-hover: rgb(11, 179, 230);
   --color-btn-active: rgb(87, 186, 216);
   --color-white: rgb(240, 254, 255);
+  --color-quantity-focus: rgb(196, 231, 233);
   --color-quantity: rgb(226, 244, 245);
 }
 
 html {
   font-size: calc(10px);
+  background-color: rgb(29, 48, 63);
+  /* background-color: rgb(42, 55, 65); */
 }
 
 body {
@@ -27,4 +31,24 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--color-white);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--color-btn-active);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-btn-hover);
 }

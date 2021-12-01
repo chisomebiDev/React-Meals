@@ -1,0 +1,15 @@
+.textContainer {
+  color: var(--color-white);
+  font-size: 1.6rem;
+  max-width: 55rem;
+  text-align: center;
+}
+
+.textContainer h1 {
+  margin-bottom: 1rem;
+}
+
+.textContainer p {
+  padding-bottom: 1rem;
+  letter-spacing: 0.05rem;
+}

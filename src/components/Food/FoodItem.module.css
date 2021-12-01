@@ -5,4 +5,5 @@
   border-bottom: 0.5px solid var(--color-secondary);
   width: 70rem;
   padding: 1.5rem 0;
+  background-color: white;
 }
