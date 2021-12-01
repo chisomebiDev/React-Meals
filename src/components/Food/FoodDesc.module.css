@@ -1,0 +1,19 @@
+.desc {
+  font-size: 1.3rem;
+  letter-spacing: 0.6px;
+}
+
+.desc :not(:last-child) {
+  margin-bottom: 3px;
+}
+
+.foodDesc {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--color-price);
+}

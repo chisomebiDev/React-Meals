@@ -1,0 +1,29 @@
+.amount {
+  font-size: 1.5rem;
+  width: 12rem;
+}
+
+.amt {
+  font-weight: bold;
+}
+
+.desc {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.input {
+  width: 4rem;
+  background-color: var(--color-quantity);
+  font: inherit;
+  color: var(--color-primary);
+  border: none;
+  outline: none;
+  border-radius: 1rem;
+  padding: 0.3rem 0;
+  padding-left: 0.5rem;
+}
+.input:focus {
+  background-color: var(--color-white);
+}

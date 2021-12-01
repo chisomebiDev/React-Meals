@@ -1,12 +1,16 @@
-import Cart from "./components/Navbar/Cart";
+import Header from "./components/Navbar/Header";
+import FoodItem from "./components/Food/FoodItem";
 import "./App.css";
-import Button from "./components/UI/Button";
+import Card from "./components/UI/Card";
 
 function App() {
   return (
     <>
-      <Button>Add</Button>
-      <Cart />
+      <Header />
+      <Card>
+        <FoodItem />
+        <FoodItem />
+      </Card>
     </>
   );
 }

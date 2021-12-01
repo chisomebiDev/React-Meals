@@ -4,13 +4,15 @@
   box-sizing: border-box;
   --color-primary: rgb(17, 159, 202);
   --color-secondary: rgb(7, 89, 114);
+  --color-price: rgb(3, 108, 156);
   --color-btn-hover: rgb(11, 179, 230);
-  --color-btn-active: rgb(45, 167, 204);
+  --color-btn-active: rgb(87, 186, 216);
   --color-white: rgb(240, 254, 255);
+  --color-quantity: rgb(226, 244, 245);
 }
 
 html {
-  font-size: 10px;
+  font-size: calc(10px);
 }
 
 body {
@@ -20,7 +22,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding: 20px; /*remove later*/
 }
 
 code {

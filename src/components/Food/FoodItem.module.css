@@ -1,0 +1,8 @@
+.item {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 0.5px solid var(--color-secondary);
+  width: 70rem;
+  padding: 1.5rem 0;
+}
