@@ -34,7 +34,7 @@ function ModalItem(props) {
     }, 0);
 
     setTotalAmt(sum);
-  }, [foodAmt, name]);
+  }, [foodAmt, name, setTotalAmt]);
 
   function handleItemDecrease() {
     setTotalAmt(total);

@@ -4,9 +4,14 @@ import ModalItem from "./ModalItem";
 import ReactDOM from "react-dom";
 import Button from "../UI/Button";
 import { modalArray } from "../data/config";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Overlay(props) {
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => (document.body.style.overflow = "unset");
+  }, []);
+
   return <div className={styles.overlay} onClick={props.onClick}></div>;
 }
 
