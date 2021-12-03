@@ -9,6 +9,7 @@ function ModalBtn(props) {
         fontSize: "20px",
         textAlign: "center",
       }}
+      onClick={props.onClick}
     >
       {props.children}
     </Button>

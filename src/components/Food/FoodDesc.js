@@ -1,10 +1,11 @@
 import styles from "./FoodDesc.module.css";
-function FoodDesc() {
+function FoodDesc(props) {
+  const { name, description, price } = props.meal;
   return (
     <div className={styles.desc}>
-      <h3 className={styles.foodName}>Sushi</h3>
-      <p className={styles.foodDesc}>Finest fish and veggies</p>
-      <p className={styles.price}>$22.99</p>
+      <h3 className={styles.foodName}>{name}</h3>
+      <p className={styles.foodDesc}>{description}</p>
+      <p className={styles.price}>${price}</p>
     </div>
   );
 }

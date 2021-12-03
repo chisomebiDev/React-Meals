@@ -1,13 +1,13 @@
 import FoodItem from "./FoodItem";
 import Card from "../UI/Card";
+import DUMMY_MEALS from "../data/config";
+// import DUMMY
 function FoodList() {
   return (
     <Card color="white">
-      <FoodItem />
-      <FoodItem />
-      <FoodItem />
-      <FoodItem />
-      <FoodItem />
+      {DUMMY_MEALS.map((meal) => (
+        <FoodItem key={meal.id} meal={meal} />
+      ))}
     </Card>
   );
 }

@@ -10,7 +10,8 @@
 .item {
   display: flex;
   align-items: flex-end;
-  gap: max(40%);
+  gap: 4rem;
+  /* width: 200px; */
 }
 
 .price {
@@ -30,4 +31,5 @@
   border-radius: 3px;
   border: 1px solid var(--color-quantity-focus);
   padding: 0rem 1rem;
+  justify-self: end;
 }

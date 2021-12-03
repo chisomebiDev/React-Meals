@@ -6,6 +6,7 @@
   font-weight: bold;
   width: max-content;
   border-radius: 30px;
+  border: none;
 }
 
 .items {

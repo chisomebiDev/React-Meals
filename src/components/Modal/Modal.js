@@ -3,16 +3,25 @@ import Card from "../UI/Card";
 import ModalItem from "./ModalItem";
 import ReactDOM from "react-dom";
 import Button from "../UI/Button";
+import { modalArray } from "../data/config";
+import { useState } from "react";
 
-function ModalTotal() {
+function Overlay(props) {
+  return <div className={styles.overlay} onClick={props.onClick}></div>;
+}
+
+function ModalTotal(props) {
+  const { total: totalAmt } = props;
+
   return (
     <div>
       <div className={styles.total}>
         <h3>Total Amount</h3>
-        <p className={styles.totalAmt}>$88.99</p>
+        <p className={styles.totalAmt}>${totalAmt.toFixed(2)}</p>
       </div>
       <div className={styles.btnTotal}>
         <Button
+          onClick={props.onClick}
           style={{
             backgroundColor: "white",
             color: "var(--color-textInWhite)",
@@ -28,25 +37,39 @@ function ModalTotal() {
   );
 }
 
-function Overlay() {
-  return <div className={styles.overlay}></div>;
-}
+function Modal(props) {
+  const [checkOut, setCheckOut] = useState(modalArray);
 
-const InnerModal = (
-  <>
-    <Card className={styles.modal} color="white">
-      <ModalItem />
-      <ModalItem />
-      <ModalItem />
-      <ModalTotal />
-    </Card>
-    <Overlay />
-  </>
-);
+  const total = checkOut.reduce((cum, cur) => {
+    return cum + +cur.price * +cur.quantFood;
+  }, 0);
 
-function Modal() {
+  const [totalAmt, setTotalAmt] = useState(total);
+
   return (
-    <>{ReactDOM.createPortal(InnerModal, document.getElementById("modal"))}</>
+    <>
+      {ReactDOM.createPortal(
+        <>
+          <Card className={styles.modal} color="white">
+            {checkOut.length === 0 ? (
+              <p>Please Add Items to your Cart 🛒</p>
+            ) : (
+              checkOut.map((food) => (
+                <ModalItem
+                  key={food.id}
+                  food={food}
+                  onAddItems={{ setCheckOut, checkOut }}
+                  onIncrement={{ setTotalAmt, total }}
+                />
+              ))
+            )}
+            <ModalTotal onClick={props.onClick} total={totalAmt} />
+          </Card>
+          <Overlay onClick={props.onClick} />
+        </>,
+        document.getElementById("modal")
+      )}
+    </>
   );
 }
 export default Modal;
