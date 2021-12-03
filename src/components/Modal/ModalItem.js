@@ -28,14 +28,18 @@ function ModalItem(props) {
     modalArray.forEach((foodItem, i) => {
       foodItem.quantFood = newCheckOut[i].quantFood;
     });
+
+    let sum = modalArray.reduce((cum, cur) => {
+      return cum + +cur.price * +cur.quantFood;
+    }, 0);
+
+    setTotalAmt(sum);
   }, [foodAmt, name]);
 
   function handleItemDecrease() {
-    console.log(total);
     setTotalAmt(total);
     if (foodAmt >= 1) setFoodAmt((foodAmt -= 1));
   }
-  console.log(total);
 
   function handleItemIncrease() {
     setTotalAmt(total);
