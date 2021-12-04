@@ -63,10 +63,10 @@ function ModalItem(props) {
           <h3>{name}</h3>
           <p className={styles.price}>${price}</p>
         </div>
-        <p className={styles.itemNumber}>x{` ${foodAmt}`}</p>
       </div>
 
-      <div>
+      <div className={styles.adding}>
+        <p className={styles.itemNumber}>x{` ${foodAmt}`}</p>
         <ModalBtn onClick={handleItemDecrease}>{minus}</ModalBtn>
         <ModalBtn onClick={handleItemIncrease}>{plus}</ModalBtn>
       </div>
