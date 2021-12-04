@@ -12,7 +12,8 @@ let newCheckOut;
 
 function ModalItem(props) {
   const { setTotalAmt, total } = props.onIncrement;
-  const { name, price, quantFood } = props.food;
+  const { setCheckOut, deleteItemHandler } = props.onAddItems;
+  const { name, price, quantFood, id } = props.food;
 
   let [foodAmt, setFoodAmt] = useState(+quantFood);
 
@@ -25,8 +26,16 @@ function ModalItem(props) {
       }
     });
 
+    setCheckOut(newCheckOut);
+
     modalArray.forEach((foodItem, i) => {
       foodItem.quantFood = newCheckOut[i].quantFood;
+    });
+
+    modalArray.forEach(() => {
+      if (foodAmt === 0) {
+        deleteItemHandler(id);
+      }
     });
 
     let sum = modalArray.reduce((cum, cur) => {
@@ -34,16 +43,17 @@ function ModalItem(props) {
     }, 0);
 
     setTotalAmt(sum);
-  }, [foodAmt, name, setTotalAmt]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [foodAmt, id, name]);
 
   function handleItemDecrease() {
     setTotalAmt(total);
-    if (foodAmt >= 1) setFoodAmt((foodAmt -= 1));
+    if (foodAmt > 0) setFoodAmt((foodAmt -= 1));
   }
 
   function handleItemIncrease() {
     setTotalAmt(total);
-    if (foodAmt > 0) setFoodAmt((foodAmt += 1));
+    if (foodAmt >= 0) setFoodAmt((foodAmt += 1));
   }
 
   return (

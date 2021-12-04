@@ -3,7 +3,13 @@
   display: flex;
   justify-content: space-between;
   border-bottom: 0.5px solid var(--color-secondary);
-  width: 70rem;
+  width: 85vw;
   padding: 1.5rem 0;
   background-color: white;
+}
+
+@media screen and (min-width: 1200px) {
+  .item {
+    width: 40vw;
+  }
 }

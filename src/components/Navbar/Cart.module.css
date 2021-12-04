@@ -27,3 +27,11 @@
 .cart:active {
   background-color: var(--color-quantity);
 }
+
+@media screen and (max-width: 800px) {
+  .cart {
+    /* width: 40%; */
+    /* padding: 0.5rem 2rem; */
+    padding: 1rem 2rem;
+  }
+}

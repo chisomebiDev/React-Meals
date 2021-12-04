@@ -1,7 +1,7 @@
 .modalItem {
   display: flex;
   justify-content: space-between;
-  min-width: 500px;
+  min-width: 75vw;
   border-bottom: 0.5px solid var(--color-secondary);
   padding: 1rem 0;
   align-items: center;
@@ -32,4 +32,10 @@
   border: 1px solid var(--color-quantity-focus);
   padding: 0rem 1rem;
   justify-self: end;
+}
+
+@media screen and (min-width: 1200px) {
+  .modalItem {
+    min-width: 35vw;
+  }
 }

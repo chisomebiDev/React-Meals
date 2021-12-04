@@ -36,13 +36,20 @@ function ModalTotal(props) {
         >
           Close
         </Button>
-        <Button>Order </Button>
+        <Button onClick={() => {}}>Order </Button>
       </div>
     </div>
   );
 }
 
 function Modal(props) {
+  //check if quantity of food is zero so that it can be removed
+  modalArray.forEach((foodItem, i, arr) => {
+    if (foodItem.quantFood === "0") {
+      modalArray.splice(i, 1);
+    }
+  });
+
   const [checkOut, setCheckOut] = useState(modalArray);
 
   const total = checkOut.reduce((cum, cur) => {
@@ -50,6 +57,11 @@ function Modal(props) {
   }, 0);
 
   const [totalAmt, setTotalAmt] = useState(total);
+
+  function deleteItemHandler(id) {
+    const newList = checkOut.filter((item) => item.id !== id);
+    setCheckOut(newList);
+  }
 
   return (
     <>
@@ -63,7 +75,7 @@ function Modal(props) {
                 <ModalItem
                   key={food.id}
                   food={food}
-                  onAddItems={{ setCheckOut, checkOut }}
+                  onAddItems={{ setCheckOut, checkOut, deleteItemHandler }}
                   onIncrement={{ setTotalAmt, total }}
                 />
               ))

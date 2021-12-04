@@ -1,7 +1,7 @@
 .textContainer {
   color: var(--color-white);
   font-size: 1.6rem;
-  max-width: 55rem;
+  max-width: 90vw;
   text-align: center;
 }
 
@@ -12,4 +12,10 @@
 .textContainer p {
   padding-bottom: 1rem;
   letter-spacing: 0.05rem;
+}
+
+@media screen and (min-width: 1200px) {
+  .textContainer {
+    width: 40vw;
+  }
 }
