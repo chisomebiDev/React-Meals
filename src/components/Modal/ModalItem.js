@@ -2,8 +2,8 @@ import styles from "./ModalItem.module.css";
 import ModalBtn from "./ModalBtn";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
-import { modalArray } from "../data/config";
+import { useEffect, useState, useContext } from "react";
+import CartContext from "../../store/modalArrayContext";
 
 const minus = <FontAwesomeIcon icon={faMinusCircle} />;
 const plus = <FontAwesomeIcon icon={faPlusCircle} />;
@@ -11,6 +11,9 @@ const plus = <FontAwesomeIcon icon={faPlusCircle} />;
 let newCheckOut;
 
 function ModalItem(props) {
+  const cartCtx = useContext(CartContext);
+
+  const modalArray = cartCtx.items;
   const { setTotalAmt, total } = props.onIncrement;
   const { setCheckOut, deleteItemHandler } = props.onAddItems;
   const { name, price, quantFood, id } = props.food;

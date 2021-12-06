@@ -3,8 +3,8 @@ import Card from "../UI/Card";
 import ModalItem from "./ModalItem";
 import ReactDOM from "react-dom";
 import Button from "../UI/Button";
-import { modalArray } from "../data/config";
-import { useState, useEffect } from "react";
+import CartContext from "../../store/modalArrayContext";
+import { useState, useEffect, useContext } from "react";
 
 function Overlay(props) {
   useEffect(() => {
@@ -43,6 +43,9 @@ function ModalTotal(props) {
 }
 
 function Modal(props) {
+  const cartCtx = useContext(CartContext);
+
+  const modalArray = cartCtx.items;
   //check if quantity of food is zero so that it can be removed
   modalArray.forEach((foodItem, i, arr) => {
     if (foodItem.quantFood === "0") {
