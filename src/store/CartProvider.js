@@ -13,22 +13,33 @@ function CartProvider(props) {
   };
 
   function addItemToCartHandler(foodItem) {
-    if (cartContext.items.length === 0) {
-      cartContext.items.push(foodItem);
+    //if cart is empty
+    if (itemsCart.length === 0) {
+      const updatesItems = itemsCart.concat(foodItem);
+      setItemsCart(updatesItems);
+      return;
     }
     //If the food name is not in the array push the food
-    const found = cartContext.items.some((food) => food.name === foodItem.name);
-    if (!found) cartContext.items.push(foodItem);
+    const found = itemsCart.some((food) => food.name === foodItem.name);
+    if (!found) {
+      const updatesItems = itemsCart.concat(foodItem);
+      setItemsCart(updatesItems);
+      return;
+    }
     //If the food name is in the array an the value of the quantFood is less or greater update the quantFood
-    cartContext.items.forEach((food) => {
+    const newCart = itemsCart.map((food) => {
       if (
         food.name === foodItem.name &&
         (+food.quantFood < +foodItem.quantFood ||
           +food.quantFood > +foodItem.quantFood)
       ) {
-        food.quantFood = foodItem.quantFood;
+        // food.quantFood = foodItem.quantFood;
+        return { ...foodItem, quantFood: foodItem.quantFood };
+      } else {
+        return food;
       }
     });
+    setItemsCart(newCart);
   }
 
   return (
