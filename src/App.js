@@ -7,8 +7,10 @@ function App() {
   return (
     <main className="App">
       <Header />
-      <Text />
-      <FoodList />
+      <article>
+        <Text />
+        <FoodList />
+      </article>
     </main>
   );
 }

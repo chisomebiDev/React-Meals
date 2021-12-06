@@ -46,11 +46,15 @@ function Quant(props) {
   return (
     <form className={styles.amount} onSubmit={foodAddHandler}>
       <div className={styles.desc}>
-        <p className={styles.amt}>Amount</p>
+        <label htmlFor={props.id} className={styles.amt}>
+          Amount
+        </label>
         <input
+          id={props.id}
           type="number"
           className={styles.input}
           min="1"
+          step="1"
           value={quantFood}
           onChange={addFoodHandler}
         />
