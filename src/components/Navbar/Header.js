@@ -8,7 +8,7 @@ function Header() {
   const [showModal, setShowModal] = useState(false);
 
   function showModalHandler() {
-    setShowModal(!showModal);
+    setShowModal((prevModal) => !prevModal);
   }
 
   return (
