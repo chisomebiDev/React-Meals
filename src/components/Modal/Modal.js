@@ -4,7 +4,8 @@ import ModalItem from "./ModalItem";
 import ReactDOM from "react-dom";
 import Button from "../UI/Button";
 import CartContext from "../../store/modalArrayContext";
-import { useState, useEffect, useContext, useRef } from "react";
+import { useState, useEffect, useContext } from "react";
+import useInput from "../../hooks/useInput";
 
 function Overlay(props) {
   useEffect(() => {
@@ -15,36 +16,35 @@ function Overlay(props) {
   return <div className={styles.overlay} onClick={props.onClick}></div>;
 }
 
-// const formValues = { username: "", street: "", city: "" };
-
-// function emailValuesHandler(state, action) {}
-
 function ModalTotal(props) {
   const { total: totalAmt } = props;
 
+  const {
+    value: name,
+    hasError: nameHasError,
+    changeHandler: nameChangeHandler,
+    blurHandler: nameBlurHandler,
+    onSubmit: nameSubmit,
+  } = useInput((value) => value.trim() !== "");
+
+  const {
+    value: city,
+    hasError: cityHasError,
+    changeHandler: cityChangeHandler,
+    blurHandler: cityBlurHandler,
+    onSubmit: citySubmit,
+  } = useInput((value) => value.trim() !== "");
+
+  const {
+    value: street,
+    hasError: streetHasError,
+    changeHandler: streetChangeHandler,
+    blurHandler: streetBlurHandler,
+    onSubmit: streetSubmit,
+  } = useInput((value) => value.trim() !== "");
+
   const [order, setOrder] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
-
-  const htmlForm = useRef();
-  //Name input handler
-  const [name, setName] = useState("");
-  const [nameIsTouched, setNameIsTouched] = useState(false);
-
-  const nameIsValid = name.trim() !== "";
-  const nameInputIsValid = !nameIsValid && nameIsTouched;
-
-  const [street, setStreet] = useState("");
-  const [city, setCity] = useState("");
-
-  // const [formIsValid, setFormIsValid] = useState(false);
-
-  // let formIsValid = false;
-  // if (nameIsValid) formIsValid = true;
-
-  // const [formStuff, dispatchFormStuff] = useReducer(
-  //   emailValuesHandler,
-  //   formValues
-  // );
 
   function showOrderHandler() {
     setOrder(true);
@@ -57,32 +57,10 @@ function ModalTotal(props) {
     if (order && formOpen) {
       console.log([...new FormData(e.target)]);
 
-      setNameIsTouched(true);
-      if (!nameIsValid) return;
-
-      setName("");
-      setStreet("");
-      setCity("");
-
-      setNameIsTouched(false);
+      nameSubmit();
+      streetSubmit();
+      citySubmit();
     }
-  }
-
-  function nameChangeHandler(e) {
-    setName(e.target.value);
-    setNameIsTouched(true);
-  }
-
-  function nameBlurHandler() {
-    setNameIsTouched(true);
-  }
-
-  function streetChangeHandler(e) {
-    setStreet(e.target.value);
-  }
-
-  function cityChangeHandler(e) {
-    setCity(e.target.value);
   }
 
   const form = (
@@ -90,7 +68,6 @@ function ModalTotal(props) {
       className={styles.form}
       id="checkout-form"
       onSubmit={formOrderHandler}
-      ref={htmlForm}
     >
       <div>
         <label htmlFor="name">Your Name</label>
@@ -102,7 +79,7 @@ function ModalTotal(props) {
           value={name}
           onBlur={nameBlurHandler}
         />
-        {nameInputIsValid && (
+        {nameHasError && (
           <p className={styles.inValid}>Please enter your name</p>
         )}
       </div>
@@ -114,7 +91,11 @@ function ModalTotal(props) {
           id="street"
           onChange={streetChangeHandler}
           value={street}
+          onBlur={streetBlurHandler}
         />
+        {streetHasError && (
+          <p className={styles.inValid}>Please enter your street</p>
+        )}
       </div>
       <div>
         <label htmlFor="city">City</label>
@@ -124,7 +105,11 @@ function ModalTotal(props) {
           id="city"
           onChange={cityChangeHandler}
           value={city}
+          onBlur={cityBlurHandler}
         />
+        {cityHasError && (
+          <p className={styles.inValid}>Please enter your city</p>
+        )}
       </div>
     </form>
   );
