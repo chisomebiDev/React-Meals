@@ -21,6 +21,8 @@ function ModalTotal(props) {
 
   const {
     value: name,
+
+    valueIsTouched: nameTouched,
     hasError: nameHasError,
     changeHandler: nameChangeHandler,
     blurHandler: nameBlurHandler,
@@ -28,19 +30,21 @@ function ModalTotal(props) {
   } = useInput((value) => value.trim() !== "");
 
   const {
-    value: city,
-    hasError: cityHasError,
-    changeHandler: cityChangeHandler,
-    blurHandler: cityBlurHandler,
-    onSubmit: citySubmit,
-  } = useInput((value) => value.trim() !== "");
-
-  const {
     value: street,
+
     hasError: streetHasError,
     changeHandler: streetChangeHandler,
     blurHandler: streetBlurHandler,
     onSubmit: streetSubmit,
+  } = useInput((value) => value.trim() !== "");
+
+  const {
+    value: city,
+
+    hasError: cityHasError,
+    changeHandler: cityChangeHandler,
+    blurHandler: cityBlurHandler,
+    onSubmit: citySubmit,
   } = useInput((value) => value.trim() !== "");
 
   const [order, setOrder] = useState(false);
@@ -48,6 +52,7 @@ function ModalTotal(props) {
 
   function showOrderHandler() {
     setOrder(true);
+
     if (order) setFormOpen(true);
   }
 
@@ -55,11 +60,14 @@ function ModalTotal(props) {
     e.preventDefault();
 
     if (order && formOpen) {
-      console.log([...new FormData(e.target)]);
-
       nameSubmit();
       streetSubmit();
       citySubmit();
+
+      if (!nameHasError && nameTouched) {
+        const orderData = Object.fromEntries([...new FormData(e.target)]);
+        console.log(orderData);
+      }
     }
   }
 
@@ -78,6 +86,7 @@ function ModalTotal(props) {
           onChange={nameChangeHandler}
           value={name}
           onBlur={nameBlurHandler}
+          className={`${nameHasError && styles.invalid}`}
         />
         {nameHasError && (
           <p className={styles.inValid}>Please enter your name</p>
@@ -92,9 +101,10 @@ function ModalTotal(props) {
           onChange={streetChangeHandler}
           value={street}
           onBlur={streetBlurHandler}
+          className={`${streetHasError && styles.invalid}`}
         />
         {streetHasError && (
-          <p className={styles.inValid}>Please enter your street</p>
+          <p className={styles.inValid}>Street address required</p>
         )}
       </div>
       <div>
@@ -106,6 +116,7 @@ function ModalTotal(props) {
           onChange={cityChangeHandler}
           value={city}
           onBlur={cityBlurHandler}
+          className={`${cityHasError && styles.invalid}`}
         />
         {cityHasError && (
           <p className={styles.inValid}>Please enter your city</p>

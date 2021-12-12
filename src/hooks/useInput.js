@@ -17,8 +17,8 @@ function useInput(validateValue) {
   }
 
   function onSubmit() {
-    setValueIsTouched(true);
-    if (!valueIsValid) return;
+    if (hasError) return;
+    setValueIsTouched(false);
 
     setValue("");
     setValueIsTouched(false);
@@ -26,6 +26,8 @@ function useInput(validateValue) {
 
   return {
     value,
+    valueIsValid,
+    valueIsTouched,
     hasError,
     changeHandler: valueChangeHandler,
     blurHandler: valueBlurHandler,
