@@ -17,11 +17,12 @@ function Overlay(props) {
 }
 
 function ModalTotal(props) {
-  const { total: totalAmt } = props;
+  const cartCtx = useContext(CartContext);
+
+  const { total: totalAmt, onOrder: setOrdered } = props;
 
   const {
     value: name,
-
     valueIsTouched: nameTouched,
     hasError: nameHasError,
     changeHandler: nameChangeHandler,
@@ -31,7 +32,6 @@ function ModalTotal(props) {
 
   const {
     value: street,
-
     hasError: streetHasError,
     changeHandler: streetChangeHandler,
     blurHandler: streetBlurHandler,
@@ -40,7 +40,6 @@ function ModalTotal(props) {
 
   const {
     value: city,
-
     hasError: cityHasError,
     changeHandler: cityChangeHandler,
     blurHandler: cityBlurHandler,
@@ -52,7 +51,6 @@ function ModalTotal(props) {
 
   function showOrderHandler() {
     setOrder(true);
-
     if (order) setFormOpen(true);
   }
 
@@ -66,7 +64,11 @@ function ModalTotal(props) {
 
       if (!nameHasError && nameTouched) {
         const orderData = Object.fromEntries([...new FormData(e.target)]);
-        console.log(orderData);
+        const usersName = orderData.name.split(" ")[0];
+
+        cartCtx.userName += usersName;
+        setOrdered(true);
+        console.log(orderData, usersName);
       }
     }
   }
@@ -125,6 +127,8 @@ function ModalTotal(props) {
     </form>
   );
 
+  const orderReady = order && +totalAmt > 0;
+
   return (
     <>
       <div>
@@ -132,7 +136,7 @@ function ModalTotal(props) {
           <h3>Total Amount</h3>
           <p className={styles.totalAmt}>${totalAmt.toFixed(2)}</p>
         </div>
-        {order && form}
+        {orderReady > 0 && form}
         <div className={styles.btnTotal}>
           <Button
             onClick={props.onClick}
@@ -143,10 +147,10 @@ function ModalTotal(props) {
               padding: "1rem 3rem",
             }}
           >
-            {order ? "Cancel" : "Close"}
+            {orderReady > 0 ? "Cancel" : "Close"}
           </Button>
           <Button onClick={showOrderHandler} form="checkout-form">
-            {order ? "Confirm" : "Order"}
+            {orderReady > 0 ? "Confirm" : "Order"}
           </Button>
         </div>
       </div>
@@ -156,7 +160,6 @@ function ModalTotal(props) {
 
 function Modal(props) {
   const cartCtx = useContext(CartContext);
-
   const modalArray = cartCtx.items;
   //check if quantity of food is zero so that it can be removed
   modalArray.forEach((foodItem, i, arr) => {
@@ -166,6 +169,7 @@ function Modal(props) {
   });
 
   const [checkOut, setCheckOut] = useState(modalArray);
+  const [ordered, setOrdered] = useState(false);
 
   const total = checkOut.reduce((cum, cur) => {
     return cum + +cur.price * +cur.quantFood;
@@ -178,24 +182,46 @@ function Modal(props) {
     setCheckOut(newList);
   }
 
+  let content = (
+    <>
+      {checkOut.length === 0 ? (
+        <p>Please Add Items to your Cart 🛒</p>
+      ) : (
+        checkOut.map((food) => (
+          <ModalItem
+            key={food.id}
+            food={food}
+            onAddItems={{ setCheckOut, checkOut, deleteItemHandler }}
+            onIncrement={{ setTotalAmt, total }}
+          />
+        ))
+      )}
+      <ModalTotal
+        onClick={props.onClick}
+        total={totalAmt}
+        onOrder={setOrdered}
+      />
+    </>
+  );
+
+  if (ordered) {
+    cartCtx.items = [];
+    content = (
+      <div className={styles["order-closed"]}>
+        <p>
+          Enjoy your ReactMeal <span>{cartCtx.userName}</span> 😋
+        </p>
+        <Button onClick={props.onClick}>Close</Button>
+      </div>
+    );
+  }
+
   return (
     <>
       {ReactDOM.createPortal(
         <>
           <Card className={styles.modal} color="white">
-            {checkOut.length === 0 ? (
-              <p>Please Add Items to your Cart 🛒</p>
-            ) : (
-              checkOut.map((food) => (
-                <ModalItem
-                  key={food.id}
-                  food={food}
-                  onAddItems={{ setCheckOut, checkOut, deleteItemHandler }}
-                  onIncrement={{ setTotalAmt, total }}
-                />
-              ))
-            )}
-            <ModalTotal onClick={props.onClick} total={totalAmt} />
+            {content}
           </Card>
           <Overlay onClick={props.onClick} />
         </>,

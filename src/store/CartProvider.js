@@ -10,6 +10,7 @@ function CartProvider(props) {
     totalAmount: () => {},
     addItem: addItemToCartHandler,
     removeItem: removeItemFomCartHandler,
+    userName: "",
   };
 
   function addItemToCartHandler(foodItem) {

@@ -67,3 +67,32 @@
   color: red;
   font-size: 1.2rem;
 }
+
+.order-closed {
+  display: flex;
+  flex-direction: column;
+  width: 70vw;
+  justify-content: right;
+}
+
+.order-closed p {
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 0.5px solid var(--color-textInWhite);
+}
+
+.order-closed span {
+  font-weight: bold;
+}
+
+.order-closed button {
+  padding: 1rem 3rem;
+  /* justify-self: right; */
+  align-self: flex-end;
+}
+
+@media screen and (min-width: 1200px) {
+  .order-closed {
+    width: 35vw;
+  }
+}
