@@ -1,39 +1,67 @@
 import FoodItem from "./FoodItem";
 import Card from "../UI/Card";
-import { useState } from "react/cjs/react.development";
-import { useEffect } from "react";
+// import { useState } from "react/cjs/react.development";
+// import { useEffect } from "react";
 
 function FoodList() {
-  const [meals, setMeals] = useState([]);
+  // const [meals, setMeals] = useState([]);
 
-  async function fetchMeals() {
-    try {
-      const meals = await fetch(
-        "https://react-http-ab6b1-default-rtdb.firebaseio.com/reactmeals.json"
-      );
+  // async function fetchMeals() {
+  //   try {
+  //     const ReactMeals = await fetch(
+  //       "https://react-http-ab6b1-default-rtdb.firebaseio.com/reactmeals.json"
+  //     );
 
-      const mealsObject = await meals.json();
+  //     const mealsObject = await ReactMeals.json();
 
-      const mealsArray = Object.keys(mealsObject).map((key) => {
-        return mealsObject[key];
-      });
+  //     const mealsArray = Object.keys(mealsObject).map((key) => {
+  //       return mealsObject[key];
+  //     });
 
-      const DUMMY_MEALS = mealsArray.flat();
+  //     const DUMMY_MEALS = mealsArray.flat();
 
-      setMeals(DUMMY_MEALS);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  //     setMeals(DUMMY_MEALS);
+  //     console.log(meals);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
-  useEffect(() => {
-    fetchMeals();
-  }, []);
+  const DUMMY_MEALS = [
+    {
+      description: "Finest fish and veggies",
+      id: "m1",
+      name: "Sushi",
+      price: 22.99,
+    },
+    {
+      description: "A german specialty!",
+      id: "m2",
+      name: "Schnitzel",
+      price: 16.5,
+    },
+    {
+      description: "American, raw, meaty",
+      id: "m3",
+      name: "Barbecue Burger",
+      price: 12.99,
+    },
+    {
+      description: "Healthy...and green...",
+      id: "m4",
+      name: "Green Bowl",
+      price: 18.99,
+    },
+  ];
+
+  // useEffect(() => {
+  //   fetchMeals();
+  // }, []);
 
   return (
     <Card color="white">
       <ul>
-        {meals.map((meal) => (
+        {DUMMY_MEALS.map((meal) => (
           <FoodItem key={meal.id} meal={meal} />
         ))}
       </ul>
