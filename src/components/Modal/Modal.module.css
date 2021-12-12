@@ -32,3 +32,38 @@
   justify-content: right;
   gap: 1.5rem;
 }
+
+.form {
+  margin-bottom: 2rem;
+}
+
+.form div {
+  display: flex;
+  flex-direction: column;
+}
+
+.form input {
+  padding-left: 1rem;
+  font: inherit;
+  width: 50vw;
+  height: 3rem;
+  margin-bottom: 0.5rem;
+  border: solid 0.05rem var(--color-textInWhite);
+  border-radius: 0.5rem;
+  /* margin-bottom: 1.2rem; */
+}
+
+.invalid {
+  background-color: #fc000067;
+  border: 2px solid red;
+}
+
+.form label {
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.inValid {
+  color: red;
+  font-size: 1.2rem;
+}
