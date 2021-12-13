@@ -62,7 +62,7 @@ function Modal(props) {
     </>
   );
 
-  if (ordered) content = <Order />;
+  if (ordered) content = <Order onClick={props.onClick} />;
 
   return (
     <>
