@@ -55,7 +55,7 @@ function ModalTotal(props) {
         cartCtx.orderData = Object.fromEntries([...new FormData(e.target)]);
         const usersName = cartCtx.orderData.name.split(" ")[0];
 
-        cartCtx.userName += usersName;
+        cartCtx.userName = usersName;
         setOrdered(true);
         console.log(cartCtx.orderData, cartCtx.items, usersName);
       }
