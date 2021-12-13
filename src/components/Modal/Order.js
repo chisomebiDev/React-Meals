@@ -9,7 +9,8 @@ function Order(props) {
   const orderNumber = Math.trunc(Math.random() * 1000000000);
   const date = new Intl.DateTimeFormat("en-GB", {
     dateStyle: "long",
-    // timeStyle: "medium",
+    timeStyle: "short",
+    hourCycle: "h12",
   }).format(new Date());
 
   return (
@@ -54,7 +55,7 @@ function Order(props) {
 
       <p>
         <span>{cartCtx.userName},</span> thank you for placing the order. Enjoy
-        your <span>ReactMeal</span> 😋
+        your <span>ReactMeal!</span> 😋
       </p>
       <Button onClick={props.onClick}>Close</Button>
     </div>
