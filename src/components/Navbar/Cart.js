@@ -15,6 +15,9 @@ function Cart(props) {
 
   const btnClass = `${styles.cart} ${btnHighlighted ? styles.bump : ""}`;
 
+  // const order = JSON.parse(localStorage.getItem("order"));
+  // if (cartCtx.items?.length === 0) cartCtx.items = order;
+
   //Calculate total items in cart
   const total = items.reduce((cum, cur) => {
     return cum + +cur.quantFood;

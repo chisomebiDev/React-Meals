@@ -4,6 +4,19 @@ import CartContext from "../../store/modalArrayContext";
 import { useState, useContext } from "react";
 import useInput from "../../hooks/useInput";
 
+async function sendData(movie) {
+  const response = await fetch(
+    "https://react-http-ab6b1-default-rtdb.firebaseio.com/meal-orders.json",
+    {
+      method: "POST",
+      body: JSON.stringify(movie),
+      headers: { "Context-Type": "application/json" },
+    }
+  );
+
+  await response.json();
+}
+
 function ModalTotal(props) {
   const cartCtx = useContext(CartContext);
 
@@ -35,6 +48,14 @@ function ModalTotal(props) {
     onSubmit: citySubmit,
   } = useInput((value) => value.trim() !== "");
 
+  const {
+    value: postal,
+    hasError: postalHasError,
+    changeHandler: postalChangeHandler,
+    blurHandler: postalBlurHandler,
+    onSubmit: postalSubmit,
+  } = useInput((value) => value.length === 6);
+
   const [order, setOrder] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
 
@@ -50,14 +71,21 @@ function ModalTotal(props) {
       nameSubmit();
       streetSubmit();
       citySubmit();
+      postalSubmit();
 
       if (!nameHasError && nameTouched) {
         cartCtx.orderData = Object.fromEntries([...new FormData(e.target)]);
+        sendData({
+          ...cartCtx.orderData,
+          takeaway: cartCtx.items,
+          total: cartCtx.totalAmount,
+        });
+
         const usersName = cartCtx.orderData.name.split(" ")[0];
 
         cartCtx.userName = usersName;
         setOrdered(true);
-        console.log(cartCtx.orderData, cartCtx.items, usersName);
+        console.log(cartCtx.orderData);
       }
     }
   }
@@ -96,6 +124,21 @@ function ModalTotal(props) {
         />
         {streetHasError && (
           <p className={styles.inValid}>Street address required</p>
+        )}
+      </div>
+      <div>
+        <label htmlFor="postal">Postal Code</label>
+        <input
+          name="postal"
+          type="text"
+          id="postal"
+          onChange={postalChangeHandler}
+          value={postal}
+          onBlur={postalBlurHandler}
+          className={`${postalHasError && styles.invalid}`}
+        />
+        {postalHasError && (
+          <p className={styles.inValid}>Postal code need to be six digits</p>
         )}
       </div>
       <div>

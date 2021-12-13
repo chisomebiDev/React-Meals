@@ -1,16 +1,22 @@
 import FoodItem from "./FoodItem";
 import Card from "../UI/Card";
-// import { useState } from "react/cjs/react.development";
+// import { useState } from "react";
 // import { useEffect } from "react";
 
 function FoodList() {
   // const [meals, setMeals] = useState([]);
+
+  // const [httpError, setHttpError] = useState();
 
   // async function fetchMeals() {
   //   try {
   //     const ReactMeals = await fetch(
   //       "https://react-http-ab6b1-default-rtdb.firebaseio.com/reactmeals.json"
   //     );
+
+  // if (!ReactMeals.ok){
+  //   throw new Error('Something went wrong')
+  // }
 
   //     const mealsObject = await ReactMeals.json();
 

@@ -25,6 +25,15 @@ function Quant(props) {
     cartCtx.addItem(foodItem);
   }
 
+  // let order = JSON.parse(localStorage.getItem("order"));
+
+  // if (order.length === 0) {
+  //   localStorage.setItem("order", JSON.stringify(cartCtx.items));
+  // }
+
+  // if (cartCtx.items) order = cartCtx.items;
+  // if (cartCtx.items?.length === 0) cartCtx.items = order;
+
   return (
     <form className={styles.amount} onSubmit={foodAddHandler}>
       <div className={styles.desc}>
