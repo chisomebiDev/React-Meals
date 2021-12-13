@@ -18,8 +18,6 @@ async function sendData(movie) {
   } catch (error) {
     console.log("Error");
   }
-
-  console.log(movie);
 }
 
 const isEmpty = (value) => value.trim() !== "";

@@ -15,6 +15,11 @@ function Order(props) {
 
   cartCtx.date = date;
 
+  function finishOrder() {
+    cartCtx.items = [];
+    props.onClick();
+  }
+
   return (
     <div className={styles["order-closed"]}>
       <p>
@@ -59,7 +64,7 @@ function Order(props) {
         <span>{cartCtx.userName},</span> thank you for placing the order. Enjoy
         your <span>ReactMeal!</span> 😋
       </p>
-      <Button onClick={props.onClick}>Close</Button>
+      <Button onClick={finishOrder}>Close</Button>
     </div>
   );
 }

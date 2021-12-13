@@ -23,16 +23,23 @@ function Quant(props) {
   function buttonHandler() {
     setQuantFood(`${+quantFood + 1}`);
     cartCtx.addItem(foodItem);
+
+    // let order = JSON.parse(localStorage.getItem("order"));
+    // if (localStorage.order)
+    //   localStorage.setItem("order", JSON.stringify(cartCtx.items));
+
+    // //If there is an order it should be the new array and new additions should be made to it
+    // let order = localStorage.getItem("order");
+    // // if (order) cartCtx.items = JSON.parse(order);
+
+    // localStorage.setItem("order", JSON.stringify(cartCtx.items));
+
+    //set order to this new array
+
+    //else if there is no order a new on should be created
   }
 
-  // let order = JSON.parse(localStorage.getItem("order"));
-
-  // if (order.length === 0) {
-  //   localStorage.setItem("order", JSON.stringify(cartCtx.items));
-  // }
-
-  // if (cartCtx.items) order = cartCtx.items;
-  // if (cartCtx.items?.length === 0) cartCtx.items = order;
+  // if (order) cartCtx.items = order;
 
   return (
     <form className={styles.amount} onSubmit={foodAddHandler}>
