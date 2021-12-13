@@ -13,6 +13,8 @@ function Order(props) {
     hourCycle: "h12",
   }).format(new Date());
 
+  cartCtx.date = date;
+
   return (
     <div className={styles["order-closed"]}>
       <p>

@@ -5,17 +5,25 @@ import { useState, useContext } from "react";
 import useInput from "../../hooks/useInput";
 
 async function sendData(movie) {
-  const response = await fetch(
-    "https://react-http-ab6b1-default-rtdb.firebaseio.com/meal-orders.json",
-    {
-      method: "POST",
-      body: JSON.stringify(movie),
-      headers: { "Context-Type": "application/json" },
-    }
-  );
+  try {
+    const response = await fetch(
+      "https://react-http-ab6b1-default-rtdb.firebaseio.com/meal-orders.json",
+      {
+        method: "POST",
+        body: JSON.stringify(movie),
+        headers: { "Context-Type": "application/json" },
+      }
+    );
+    await response.json();
+  } catch (error) {
+    console.log("Error");
+  }
 
-  await response.json();
+  console.log(movie);
 }
+
+const isEmpty = (value) => value.trim() !== "";
+const isFiveChars = (value) => value.length === 6 && Number.isInteger(+value);
 
 function ModalTotal(props) {
   const cartCtx = useContext(CartContext);
@@ -30,7 +38,7 @@ function ModalTotal(props) {
     changeHandler: nameChangeHandler,
     blurHandler: nameBlurHandler,
     onSubmit: nameSubmit,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput(isEmpty);
 
   const {
     value: street,
@@ -38,7 +46,7 @@ function ModalTotal(props) {
     changeHandler: streetChangeHandler,
     blurHandler: streetBlurHandler,
     onSubmit: streetSubmit,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput(isEmpty);
 
   const {
     value: city,
@@ -46,7 +54,7 @@ function ModalTotal(props) {
     changeHandler: cityChangeHandler,
     blurHandler: cityBlurHandler,
     onSubmit: citySubmit,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput(isEmpty);
 
   const {
     value: postal,
@@ -54,7 +62,7 @@ function ModalTotal(props) {
     changeHandler: postalChangeHandler,
     blurHandler: postalBlurHandler,
     onSubmit: postalSubmit,
-  } = useInput((value) => value.length === 6);
+  } = useInput(isFiveChars);
 
   const [order, setOrder] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
@@ -65,6 +73,13 @@ function ModalTotal(props) {
   }
 
   function formOrderHandler(e) {
+    const date = new Intl.DateTimeFormat("en-GB", {
+      dateStyle: "long",
+      timeStyle: "short",
+      hourCycle: "h12",
+    }).format(new Date());
+
+    cartCtx.date = date;
     e.preventDefault();
 
     if (order && formOpen) {
@@ -75,17 +90,18 @@ function ModalTotal(props) {
 
       if (!nameHasError && nameTouched) {
         cartCtx.orderData = Object.fromEntries([...new FormData(e.target)]);
+
         sendData({
           ...cartCtx.orderData,
-          takeaway: cartCtx.items,
-          total: cartCtx.totalAmount,
+          totalItems: cartCtx.items,
+          totalAmt: cartCtx.totalAmount.toFixed(2),
+          date: cartCtx.date,
         });
 
         const usersName = cartCtx.orderData.name.split(" ")[0];
 
         cartCtx.userName = usersName;
         setOrdered(true);
-        console.log(cartCtx.orderData);
       }
     }
   }
@@ -138,7 +154,7 @@ function ModalTotal(props) {
           className={`${postalHasError && styles.invalid}`}
         />
         {postalHasError && (
-          <p className={styles.inValid}>Postal code need to be six digits</p>
+          <p className={styles.inValid}>Postal code needs to be six digits</p>
         )}
       </div>
       <div>

@@ -12,6 +12,7 @@ function CartProvider(props) {
     removeItem: removeItemFomCartHandler,
     userName: "",
     orderData: {},
+    date: "",
   };
 
   function addItemToCartHandler(foodItem) {
