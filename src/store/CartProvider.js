@@ -7,10 +7,11 @@ function CartProvider(props) {
 
   const cartContext = {
     items: itemsCart,
-    totalAmount: () => {},
+    totalAmount: 0,
     addItem: addItemToCartHandler,
     removeItem: removeItemFomCartHandler,
     userName: "",
+    orderData: {},
   };
 
   function addItemToCartHandler(foodItem) {
